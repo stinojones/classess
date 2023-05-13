@@ -1,15 +1,14 @@
 using System;
+using System.IO; 
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Hello Develop02 World!");
+    Prompt prompt1 = new Prompt();
+    Entry _entry = new Entry();
 
-        
+    Journal myJournal = new Journal();
+
+    
+    Menu _menu = new Menu(_entry);
+    _menu.Display();
 
 
-
-
-    }
-}
+    

@@ -22,7 +22,7 @@ public void Display()
     {
         while(options.Contains(response) == false)
         {
-            Console.WriteLine("[A]dd Quote:\n[S]how Qutoes\n[Find]Quote by Author\n[R]andom Quote\n[Q]uit\n\nWhat do you want to do? ");
+            Console.WriteLine("[A]dd Quote:\n[S]how Qutoes\n[F]ind Quote by Author\n[R]andom Quote\n[Q]uit\n\nWhat do you want to do? ");
             response = Console.ReadLine() ?? String.Empty;
             // this above means if they input nothing then it'll come in as an empty string
             response = response.ToUpper();
