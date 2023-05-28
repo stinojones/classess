@@ -4,6 +4,25 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+
+        Reference Nephi = new Reference("1 Nephi", 1, 6);
+        Nephi.Display();
+
+
+
+        Word money = new Word("hello buddy, how are you?");
+        money.HideWord();
+        money.Display();
+
+        money.ShowWord();
+        money.Display();
+
+
+
+
+
+
+
+        
     }
 }
