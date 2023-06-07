@@ -1,52 +1,98 @@
+using System;
+using System.Collections.Generic;
+
 public class Word
 {
-// ---------------------------------variables----------------------------------------
-private string _word;
-private bool _isHidden;
-private string _hiddenWord;
-// --------------------------------constructor----------------------------------------
-public Word(string word, bool isHidden = false)
-{
-_word = word;
-_isHidden = isHidden;
-_hiddenWord = word;
+    private string _word;
+    private bool _isHidden;
+    private string _hiddenWord;
+    private int _roundHidden;
 
-}
-
-// ----------------------------------methods----------------------------------------
-
-public void HideWord()
-{
-    _isHidden = true;
-
-}
-public void ShowWord()
-{
-    _isHidden = false;
-}
-
-public void Display()
-{
-
-if (_isHidden == true)
-{
-    foreach(char letter in _word)
+    public Word(string word, bool isHidden, string hiddenWord = "", int roundHidden = 0)
     {
-        if (char.IsPunctuation(letter))
+        _word = word;
+        _isHidden = isHidden;
+        _hiddenWord = hiddenWord;
+        _roundHidden = roundHidden;
+    }
+
+    public void Hide()
+    {
+        _isHidden = true;
+    }
+
+    public void Unhide()
+    {
+        _isHidden = false;
+    }
+
+    public void SetRoundHidden(int roundHidden)
+    {
+        _roundHidden = roundHidden;
+    }
+
+    public int GetRoundHidden()
+    {
+        return _roundHidden;
+    }
+
+    public string GetValue()
+    {
+        return _word;
+    }
+
+    public bool IsHidden()
+    {
+        return _isHidden;
+    }
+
+    public void Show()
+    {
+        if (!_isHidden)
         {
-            Console.WriteLine(letter);
+            foreach (char letter in _word)
+            {
+                Console.Write(letter);
+            }
+        }
+    }
+
+    public string GetHiddenValue()
+    {
+        if (_isHidden)
+        {
+            foreach (char letter in _word)
+            {
+                Console.Write("_");
+            }
+        }
+        return _word;
+    }
+
+    public void WriteHiddenValue()
+    {
+        if (_isHidden)
+        {
+            foreach (char letter in _word)
+            {
+                if (Char.IsPunctuation(letter) || Char.IsNumber(letter))
+                {
+                    Console.Write(letter);
+                }
+                else
+                {
+                    Console.Write("_");
+                }
+            }
+            Console.Write(" ");
         }
         else
         {
-            Console.Write("-");
+            Console.Write($"{_word} ");
         }
     }
-}
-else
-{
-    Console.Write(_word);
-}
 
-}
-
+    public void Display()
+    {
+    }
 }

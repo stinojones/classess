@@ -1,12 +1,10 @@
 public class Reference
 {
-    // ---------------------------------variables----------------------------------------
     private string _book;
     private int _chapter;
     private int _firstVerse;
     private int _lastVerse;
 
-    // --------------------------------constructor----------------------------------------
     public Reference(string book, int chapter, int firstVerse, int lastVerse = -1)
     {
         _book = book;
@@ -15,9 +13,11 @@ public class Reference
         _lastVerse = lastVerse;
     }
 
-    // ----------------------------------methods----------------------------------------
+    public Reference()
+    {
+    }
 
-    public void Display() 
+    public void Display()
     {
         if (_lastVerse > 0)
         {
@@ -27,8 +27,5 @@ public class Reference
         {
             Console.WriteLine($"{_book} {_chapter}:{_firstVerse}");
         }
-
     }
-
-
 }
