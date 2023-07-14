@@ -1,9 +1,14 @@
-using System;
 
-class Program
+
+public class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello Develop05 World!");
+        List<Goal> goals = GoalManager.LoadGoals();
+
+        Menu menu = new Menu(goals);
+        menu.Show();
+
+        GoalManager.SaveGoals(goals);
     }
 }

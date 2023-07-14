@@ -12,7 +12,7 @@ class Program
             Console.WriteLine("1. Breathing Activity");
             Console.WriteLine("2. Reflection Activity");
             Console.WriteLine("3. Listing Activity");
-            Console.WriteLine("4. Quit");
+            Console.WriteLine("4. Quit`");
 
             int choice = Convert.ToInt32(Console.ReadLine());
             MindfulnessActivity activity = null;

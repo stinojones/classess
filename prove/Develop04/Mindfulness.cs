@@ -17,7 +17,7 @@ abstract class MindfulnessActivity
         Console.WriteLine(activityDescription);
         SetDuration();
         PrepareToBegin();
-        PerformActivity();
+        PerformActivity();  
         FinishActivity();
     }
 
@@ -30,14 +30,14 @@ abstract class MindfulnessActivity
     protected void PrepareToBegin()
     {
         Console.WriteLine("Get ready to begin...");
-        Thread.Sleep(3000); // Pause for 3 seconds
+        Thread.Sleep(7000); 
     }
 
     protected void FinishActivity()
     {
         Console.WriteLine("Good job! You have completed " + activityName + ".");
         Console.WriteLine("Duration: " + duration + " seconds");
-        Thread.Sleep(3000); // Pause for 3 seconds
+        Thread.Sleep(7000); 
     }
 
     protected abstract void PerformActivity();

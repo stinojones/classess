@@ -1,6 +1,7 @@
-public class Loanable 
+
 // this is the inheritable class where all the similar variables and methods should be that are used in every class
 // and now access everything underneath it
+public class Loanable 
 {
     // variables
     protected bool _isCheckedIn = true;

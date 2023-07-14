@@ -11,10 +11,10 @@ class BreathingActivity : MindfulnessActivity
         while (secondsElapsed < duration)
         {
             Console.WriteLine("Breathe in...");
-            Thread.Sleep(2000); // Pause for 2 seconds
+            Thread.Sleep(3000); 
             Console.WriteLine("Breathe out...");
-            Thread.Sleep(2000); // Pause for 2 seconds
-            secondsElapsed += 4; // 2 seconds for breathe in + 2 seconds for breathe out
+            Thread.Sleep(3000); 
+            secondsElapsed += 3; 
         }
     }
 }
