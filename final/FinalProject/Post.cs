@@ -11,13 +11,14 @@ public FileHandler fileHandler = new FileHandler();
  protected List<string> postStringList = new List<string>();
 protected string _stringPost;
 
-public string postinputString;
-public int postinputNumber;
+    string[] lines = File.ReadAllLines(_postPath);
+
+
  
 
 // -------------------------------paths--------------------------------
 
- protected string _postPath = "post.txt";
+static string _postPath = "post.txt";
 
 // ----------------------------------------constructor-------------------------------------------
      public Post(string quote = "", int likes = 0)
@@ -28,81 +29,123 @@ public int postinputNumber;
 
     // -----------------------------------------methods----------------------------------------------
 
-
-
-    public override string ToString()
-    {
-        return $"Quote: {_quote} || {_likes} Likes";
-    }
-
-    
-
-public void AddComment()
-{
-    Console.WriteLine("Comment: ");
-    _comment = Console.ReadLine();
-    _commentList.Add(_comment);
-
-}
-
   
-     public void CreatePost()
+public void CreatePost()
 {
     Console.WriteLine("Post: ");
-    _quote = Console.ReadLine();
-    Post post = new Post(_quote);
-    // _postList.Add(post);
-    // _stringPost = post.ToString();
-    // postStringList.Add(_stringPost);
-    // fileHandler.SaveFile(postStringList,_postPath);
+    string quote = Console.ReadLine();
+    Post post = new Post(quote);
 
+    string csv = $"{post._quote},{post._likes}";
 
-        string csv = $"{post._quote},{post._likes}";
+    string filePath = "post.txt";
 
-        string filePath = "post.txt";
-
-        File.WriteAllText(filePath, csv);
-      
-
-   
-
-   
-    
-
-}
-
-public void DisplayPost(List<Post> _postList)
-{
-    postStringList = fileHandler.LoadFile(_postPath);
-
-    foreach (string post in postStringList)
+    using (StreamWriter sw = File.AppendText(filePath))
     {
-        int postNumber = postStringList.IndexOf(post) + 1;
-        Console.WriteLine($"{postNumber}. {post.ToString()} || {currentDateTime}");
-
+        sw.WriteLine(csv);
     }
-    // Console.WriteLine($"[L]ike");
-    // postinputString = Console.ReadLine();
-    // if (postinputString == "l" || postinputString == "L")
-    // {
-    //     Console.WriteLine("Which Post[#]: ");
-    //     postinputString = Console.ReadLine();
-    //     postinputNumber = int.Parse(postinputString);
-    //     LikePost(_postList[postinputNumber]);
-    // }
-    // else
-    // {
-    // }
 
+    _postList.Add(post);
 }
 
 
-public void LikePost(Post post)
+public void DisplayPost()
 {
-_likes = _likes + 1;
+    LoadPostsToPostList();
+    foreach (Post post in _postList)
+    {
+
+        int postNumber = _postList.IndexOf(post) + 1;
+        Console.WriteLine($"{postNumber}. {post._quote} || {post._likes} Likes || {currentDateTime}");
+    }
+}
+
+
+public void LikePost(int postNumber)
+{
+    LoadPostsFromFile();
+    if (postNumber <= 0 || postNumber > _postList.Count)
+    {
+        Console.WriteLine("Invalid post number.");
+        return;
+    }
+
+    Post post = _postList[postNumber - 1];
+    post._likes++;
+
+    UpdatePostInFile(post, postNumber); // Update the liked post in the file
+
+    Console.WriteLine($"Post number {postNumber} liked. Current likes: {post._likes}");
+}
+
+// Update the liked post in the file
+private void UpdatePostInFile(Post post, int postNumber)
+{
+    string[] lines = File.ReadAllLines(_postPath);
+
+    if (postNumber <= lines.Length)
+    {
+        lines[postNumber - 1] = $"{post._quote},{post._likes}";
+        File.WriteAllLines(_postPath, lines);
+    }
+}
+    public void SavePostsToFile()
+    {
+        List<string> postStringList = new List<string>();
+        foreach (Post post in _postList)
+        {
+            string postString = $"{post._quote},{post._likes}";
+            postStringList.Add(postString);
+        }
+
+        File.WriteAllLines(_postPath, postStringList);
+    }
+
+    // Load posts from the file
+    public void LoadPostsFromFile()
+    {
+        _postList.Clear(); 
+        string[] lines = File.ReadAllLines(_postPath);
+
+        foreach (string line in lines)
+        {
+            string[] postItems = line.Split(',');
+            if (postItems.Length >= 2)
+            {
+                string quote = postItems[0];
+                int likes = int.Parse(postItems[1]);
+                Post post = new Post(quote, likes);
+                _postList.Add(post);
+            }
+        }
+    }
+
+
+
+
+
+    public void LoadPostsToPostList()
+    {
+        _postList.Clear(); 
+
+        string[] lines = File.ReadAllLines(_postPath);
+
+        foreach (string line in lines)
+        {
+            string[] postItems = line.Split(',');
+            if (postItems.Length >= 2)
+            {
+                string quote = postItems[0];
+                int likes = int.Parse(postItems[1]);
+                Post post = new Post(quote, likes);
+                _postList.Add(post);
+            }
+        }
+}
 }
 
 
 
 
-}
+
+
